@@ -23,7 +23,7 @@ function seedRiders() {
     ['Ana Villanueva','Female','Honda','Beat','White','NAB 9021','2026-02-18','Approved','Suspended','Suspended','2026-02-21'],
     ['Carlo Mendoza','Male','Kawasaki','Barako 175','Green','TUV 3345','2026-03-05','Approved','Active','Verified','2026-03-08'],
     ['Liza Bautista','Female','Yamaha','NMAX','Gray','NDE 6612','2026-04-09','Approved','Active','Regular','2026-04-12'],
-    ['Mark Reyes','Male','Honda','TMX 155','Black','ABX 1180','2026-05-14','Pending','Pending','','' ],
+    ['Mark C. Reyes','Male','Honda','TMX 155','Black','ABX 1180','2026-05-14','Pending','Pending','','' ],
     ['Grace Aquino','Female','Suzuki','Skydrive','Pink','CDF 5530','2026-06-02','Pending','Pending','',''],
     ['Rico Fernandez','Male','Yamaha','Sniper 155','Blue','XYZ 8841','2026-07-11','Pending','Pending','',''],
     ['Jenny Castillo','Female','Honda','Click 160','Orange','HJK 2209','2026-08-19','Info Requested','Pending','',''],
