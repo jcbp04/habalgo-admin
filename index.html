@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HabalGo Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ADMIN LOGIN -->
+<main id="loginView" class="login hidden">
+  <form id="loginForm" class="login-card" novalidate>
+    <div class="logo">Habal<span>Go</span></div>
+    <h1>Admin Login</h1>
+    <p class="muted">Sign in to manage riders and applications.</p>
+    <div class="demo">Demo authentication only. Email <b>admin@habalgo.com</b> (or username <b>admin</b>), password <b>Admin@123</b></div>
+    <label>Email or username<input id="lgUser" autocomplete="username" placeholder="admin@habalgo.com"></label>
+    <label>Password
+      <span class="pw"><input id="lgPass" type="password" autocomplete="current-password" placeholder="Enter your password"><button type="button" id="togglePw" class="ghost sm">Show</button></span>
+    </label>
+    <div id="lgErr" class="err"></div>
+    <div class="row between">
+      <label class="check"><input type="checkbox" id="lgRemember"> Remember me</label>
+      <a href="#" id="forgot">Forgot password?</a>
+    </div>
+    <button class="btn block" type="submit">Log in</button>
+    <a class="back" href="#" id="backHome">Back to homepage</a>
+  </form>
+</main>
+
+<!-- ADMIN APP -->
+<div id="appView" class="app hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">Habal<span>Go</span></div>
+    <div class="muted tiny">Admin Console</div>
+    <nav id="nav">
+      <button data-go="dashboard" class="on">Dashboard</button>
+      <button data-go="approval">Rider Approval <i id="pendBadge" class="pill"></i></button>
+      <button data-go="membership">Rider Membership</button>
+      <button data-go="riders">Rider Management</button>
+      <button data-go="rides">Ride History</button>
+      <button data-go="reports">Reports</button>
+      <button data-go="settings">Settings</button>
+    </nav>
+    <button class="logout" id="logoutBtn">Logout</button>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="ghost menu" id="menuBtn" aria-label="Menu">Menu</button>
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="who"><span class="avatar" id="topAvatar">A</span><span id="topName">Admin</span></div>
+    </header>
+
+    <section id="dashboard" class="panel">
+      <div class="stats" id="stats"></div>
+      <div class="grid2">
+        <div class="card"><h3>Recent activity</h3><ul id="activity" class="feed"></ul></div>
+        <div class="card"><h3>Recently registered riders</h3><div class="tw"><table id="recentTbl"></table></div></div>
+      </div>
+    </section>
+
+    <section id="approval" class="panel hidden">
+      <div class="card">
+        <div class="bar"><input id="apSearch" placeholder="Search by name, ID or email">
+          <select id="apFilter"><option value="">All open applications</option><option>Pending</option><option>Info Requested</option><option>Rejected</option></select></div>
+        <div class="tw"><table id="apTbl"></table></div>
+      </div>
+    </section>
+
+    <section id="membership" class="panel hidden">
+      <div class="card">
+        <div class="bar"><input id="mbSearch" placeholder="Search members">
+          <select id="mbFilter"><option value="">All membership types</option><option>Regular</option><option>Verified</option><option>Suspended</option></select></div>
+        <div class="tw"><table id="mbTbl"></table></div>
+      </div>
+    </section>
+
+    <section id="riders" class="panel hidden">
+      <div class="card">
+        <div class="bar"><input id="rdSearch" placeholder="Search riders">
+          <select id="rdFilter"><option value="">All statuses</option><option>Active</option><option>Inactive</option><option>Pending</option><option>Suspended</option><option>Rejected</option></select></div>
+        <div class="tw"><table id="rdTbl"></table></div>
+      </div>
+    </section>
+
+    <section id="rides" class="panel hidden">
+      <div class="card">
+        <div class="bar"><input id="rhSearch" placeholder="Search rider, passenger or location">
+          <label class="inl">From <input type="date" id="rhFrom"></label><label class="inl">To <input type="date" id="rhTo"></label>
+          <button class="ghost" id="rhClear">Clear</button></div>
+        <div class="tw"><table id="rhTbl"></table></div>
+      </div>
+    </section>
+
+    <section id="reports" class="panel hidden">
+      <div class="row between wrap"><p class="muted">Figures update live from the rider dataset.</p><button class="btn" id="exportBtn">Export to CSV</button></div>
+      <div class="stats" id="rpStats"></div>
+      <div class="grid2">
+        <div class="card"><h3>Monthly registrations</h3><div id="chartMonthly" class="vbars"></div></div>
+        <div class="card"><h3>Rider approval statistics</h3><div id="chartApproval"></div></div>
+      </div>
+      <div class="card"><h3>Status summary</h3><div class="tw"><table id="rpTbl"></table></div></div>
+    </section>
+
+    <section id="settings" class="panel hidden">
+      <div class="grid2">
+        <form class="card" id="profileForm"><h3>Administrator profile</h3>
+          <label>Full name<input id="stName" required></label>
+          <label>Email<input id="stEmail" type="email" required></label>
+          <button class="btn" type="submit">Save profile</button></form>
+        <form class="card" id="pwForm"><h3>Change password</h3>
+          <label>Current password<input id="pwOld" type="password" autocomplete="current-password"></label>
+          <label>New password (8+ characters)<input id="pwNew" type="password" autocomplete="new-password"></label>
+          <label>Confirm new password<input id="pwNew2" type="password" autocomplete="new-password"></label>
+          <button class="btn" type="submit">Update password</button></form>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>System information</h3><dl id="sysInfo" class="dl"></dl>
+          <button class="ghost" id="resetData">Reset sample data</button></div>
+        <div class="card"><h3>Session</h3><p class="muted">Signed in as <b id="stWho"></b>.</p><button class="btn danger" id="logout2">Log out</button></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="overlay" class="overlay hidden"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
